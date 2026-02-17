@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://bbb2430lcfiec"]
+
+[ext_resource type="Script" uid="uid://37iyc42bwmw3" path="res://scripts/player/player.gd" id="1_rkbax"]
+[ext_resource type="Script" uid="uid://c1edb1x7cjxn4" path="res://scripts/player/state_machine.gd" id="3_yw30f"]
+[ext_resource type="Script" uid="uid://bsq16uibampu5" path="res://scripts/player/idle.gd" id="4_yw30f"]
+[ext_resource type="Script" uid="uid://bca50hakml6qn" path="res://scripts/player/run.gd" id="5_g6k8r"]
+[ext_resource type="Script" uid="uid://bgj6sy43qsc0q" path="res://scripts/player/debug.gd" id="5_qjkh3"]
+[ext_resource type="Script" uid="uid://cjssav0vom5sk" path="res://scripts/player/jump.gd" id="6_rgyib"]
+[ext_resource type="Script" uid="uid://g45cnohmd15j" path="res://scripts/player/fall.gd" id="7_rgyib"]
+[ext_resource type="Script" uid="uid://bpq7gtyvci4yl" path="res://scripts/player/crouch.gd" id="8_hg6s5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kqu6x"]
+
+[node name="player" type="CharacterBody3D" unique_id=681004439 node_paths=PackedStringArray("state_machine", "head", "idle", "run", "jump", "fall")]
+script = ExtResource("1_rkbax")
+state_machine = NodePath("stateMachine")
+head = NodePath("head")
+idle = NodePath("stateMachine/idle")
+run = NodePath("stateMachine/run")
+jump = NodePath("stateMachine/jump")
+fall = NodePath("stateMachine/fall")
+rotation_speed = 2.0
+
+[node name="head" type="Node3D" parent="." unique_id=280986446]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.64081466, -0.403101)
+
+[node name="Camera3D" type="Camera3D" parent="head" unique_id=110783995]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1564180836]
+shape = SubResource("CapsuleShape3D_kqu6x")
+
+[node name="stateMachine" type="Node" parent="." unique_id=767533186]
+script = ExtResource("3_yw30f")
+
+[node name="idle" type="Node" parent="stateMachine" unique_id=1992439586]
+script = ExtResource("4_yw30f")
+metadata/_custom_type_script = "uid://xklw6563g1nc"
+
+[node name="run" type="Node" parent="stateMachine" unique_id=196041198]
+script = ExtResource("5_g6k8r")
+run_speed = 5.0
+sprint_speed = 10.0
+metadata/_custom_type_script = "uid://xklw6563g1nc"
+
+[node name="jump" type="Node" parent="stateMachine" unique_id=1953882771]
+script = ExtResource("6_rgyib")
+jump_force = 20.0
+metadata/_custom_type_script = "uid://xklw6563g1nc"
+
+[node name="fall" type="Node" parent="stateMachine" unique_id=328120560]
+script = ExtResource("7_rgyib")
+metadata/_custom_type_script = "uid://xklw6563g1nc"
+
+[node name="crouch" type="Node" parent="stateMachine" unique_id=1531106431]
+script = ExtResource("8_hg6s5")
+metadata/_custom_type_script = "uid://xklw6563g1nc"
+
+[node name="debug" type="Node" parent="." unique_id=1766628450 node_paths=PackedStringArray("head")]
+script = ExtResource("5_qjkh3")
+head = NodePath("../head")
