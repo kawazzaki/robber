@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://ghaal2y00mcf"]
+
+[ext_resource type="Script" uid="uid://dby2qdav63l6h" path="res://scripts/level/level_generator.gd" id="1_h3e3j"]
+[ext_resource type="PackedScene" uid="uid://cp2bwaga5yq6l" path="res://scenes/level/rooms/room_1.tscn" id="2_nbgty"]
+[ext_resource type="PackedScene" uid="uid://b1tqv3ao8u7ai" path="res://scenes/level/rooms/room_2.tscn" id="3_i166f"]
+[ext_resource type="Script" uid="uid://c76djxuk63ab4" path="res://scripts/level/graph_pathfinding.gd" id="4_qkmgm"]
+
+[node name="level" type="Node3D" unique_id=1739120869 node_paths=PackedStringArray("parent")]
+script = ExtResource("1_h3e3j")
+rooms_scenes = Array[PackedScene]([ExtResource("2_nbgty"), ExtResource("3_i166f")])
+parent = NodePath("rooms")
+max_rooms = 2
+grap = 0.55
+
+[node name="rooms" type="Node" parent="." unique_id=862326125]
+
+[node name="graphPathfinding" type="Node" parent="." unique_id=23275236]
+script = ExtResource("4_qkmgm")
+
+[connection signal="finish_build" from="." to="graphPathfinding" method="build_finished"]
