@@ -14,13 +14,3 @@
 
 ---
 
-## 🖼 RESULTAT
-<a href="others/imgs/Screenshot_1.png" target="_blank">
-  <img src="others/imgs/Screenshot_1.png" width="100">
-</a>
-<a href="others/imgs/Screenshot_3.png" target="_blank">
-  <img src="others/imgs/Screenshot_3.png" width="100">
-</a>
-<a href="others/imgs/Screenshot_4.png" target="_blank">
-  <img src="others/imgs/Screenshot_4.png" width="100">
-</a>
