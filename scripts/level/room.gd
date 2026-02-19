@@ -17,6 +17,9 @@ var doors = []
 var parent : Room
 var children : Array[Room]
 
+var depth: int = 0
+
+
 func clear():
 	parent = null
 	children.clear()
@@ -54,6 +57,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	DebugDraw3D.draw_text(self.global_position + Vector3.UP * 2 , "depth : " + str(depth) ,144,Color.WHITE)
 	if doors.is_empty():return
 	for door in doors:
 		DebugDraw3D.draw_arrow(door["obj"].global_position,door["obj"].global_position + door["dir"]*0.7, Color.BLUE,0.1)

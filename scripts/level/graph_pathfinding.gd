@@ -15,7 +15,7 @@ func clear():
 	path.clear()
 
 
-# BFS to find the room with the most hops from start_room
+
 func get_farthest_room() -> Room:
 	if not start_room:
 		return null
@@ -39,29 +39,28 @@ func get_farthest_room() -> Room:
 			max_depth = depth
 			farthest = room
 
-		# Traverse children
+		
 		for child in room.children:
 			if child not in visited:
 				queue.append([child, depth + 1])
 
-		# Traverse parent
+		
 		if room.parent and room.parent not in visited:
 			queue.append([room.parent, depth + 1])
 
-	print("Farthest room: ", farthest, " at depth ", max_depth)
 	return farthest
 
 
-# DFS path finding using the actual parent/children graph
+
 func find_path(current_room: Room, target: Room, visited: Array = []) -> Array:
-	# Clone visited to avoid sharing state across recursive branches
+	
 	visited = visited.duplicate()
 	visited.append(current_room)
 
 	if current_room == target:
 		return visited.duplicate()
 
-	# Walk forward into children
+	
 	for child in current_room.children:
 		if child in visited:
 			continue
@@ -69,7 +68,7 @@ func find_path(current_room: Room, target: Room, visited: Array = []) -> Array:
 		if res.size() > 0:
 			return res
 
-	# Walk backward to parent
+	
 	if current_room.parent and current_room.parent not in visited:
 		var res = find_path(current_room.parent, target, visited)
 		if res.size() > 0:
@@ -78,12 +77,41 @@ func find_path(current_room: Room, target: Room, visited: Array = []) -> Array:
 	return []
 
 
+
+
+var depth_map : Dictionary = {}
+
+func calculate_depths():
+	depth_map.clear()
+	var queue : Array = [[start_room,0]]
+	var visited : Array = []
+	while queue.size() >0:
+		var current = queue.pop_front()
+		var room : Room = current[0]
+		var depth : int = current[1]
+
+		if room in visited:
+			continue
+		visited.append(room)
+		depth_map[room] = depth
+		room.depth = depth
+		for child in room.children:
+			if child not in visited:
+				queue.append([child,depth+1])
+
+
+
+
+
+
+
+
 func build_finished(r: Array) -> void:
 	clear()
 	start_room = r[0]
 	rooms = r
 	finish_room = get_farthest_room()
-
+	calculate_depths()
 	if finish_room:
 		path = find_path(start_room, finish_room)
 		print("Path length: ", path.size())

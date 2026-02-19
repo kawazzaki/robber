@@ -114,10 +114,12 @@ func can_spawn(room : Room):
 	var detector : Area3D = room.get_node("detector")
 	await get_tree().create_timer(0.2).timeout
 	var bodies = detector.get_overlapping_bodies()
+	detector.queue_free()
 	for b in bodies:
 		if b != room:
 			return false
 		print('same room')
+	room.get_node("coll").disabled = false
 	return true
 
 func _ready() -> void:
