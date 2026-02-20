@@ -4,6 +4,5 @@
 
 [resource]
 resource_name = "floor.001"
-cull_mode = 2
 albedo_texture = ExtResource("1_7qdev")
 roughness = 0.5

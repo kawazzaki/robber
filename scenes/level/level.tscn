@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://ghaal2y00mcf"]
 
 [ext_resource type="Script" uid="uid://dby2qdav63l6h" path="res://scripts/level/level_generator.gd" id="1_h3e3j"]
+[ext_resource type="PackedScene" uid="uid://qcn4jpjrh7yg" path="res://scenes/level/rooms/room_0.tscn" id="2_hnne4"]
 [ext_resource type="PackedScene" uid="uid://cp2bwaga5yq6l" path="res://scenes/level/rooms/room_1.tscn" id="2_nbgty"]
 [ext_resource type="PackedScene" uid="uid://b1tqv3ao8u7ai" path="res://scenes/level/rooms/room_2.tscn" id="3_i166f"]
 [ext_resource type="Script" uid="uid://c76djxuk63ab4" path="res://scripts/level/graph_pathfinding.gd" id="4_qkmgm"]
 
 [node name="level" type="Node3D" unique_id=1739120869 node_paths=PackedStringArray("parent")]
 script = ExtResource("1_h3e3j")
+start_room_scene = ExtResource("2_hnne4")
 rooms_scenes = Array[PackedScene]([ExtResource("2_nbgty"), ExtResource("3_i166f")])
 parent = NodePath("rooms")
 max_rooms = 2

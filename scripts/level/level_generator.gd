@@ -2,6 +2,7 @@ extends Node3D
 
 signal finish_build(r : Array)
 
+@export var start_room_scene : PackedScene
 @export var rooms_scenes : Array[PackedScene]
 @export var parent : Node
 @export var max_rooms : int = 1
@@ -36,7 +37,7 @@ func build():
 
 
 func add_start_room():
-	var room : Room = rooms_scenes[0].instantiate()
+	var room : Room = start_room_scene.instantiate()
 	parent.add_child(room)
 	room.position = Vector3.ZERO
 	rotate_room(room)
@@ -118,7 +119,6 @@ func can_spawn(room : Room):
 	for b in bodies:
 		if b != room:
 			return false
-		print('same room')
 	room.get_node("coll").disabled = false
 	return true
 

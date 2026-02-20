@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c3syydvr38rti"]
+
+[ext_resource type="Texture2D" uid="uid://baupu0etepju6" path="res://models/level/rooms/room2_image (2).png" id="1_p5703"]
+
+[resource]
+resource_name = "wall"
+albedo_texture = ExtResource("1_p5703")
+roughness = 0.5

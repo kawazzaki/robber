@@ -44,9 +44,7 @@ func set_doors_direction():
 func get_door_by_dir(dir : Vector3):
 	for door in doors:
 		if dir.is_equal_approx(door["dir"]):
-			print('find door :' + door["obj"].name)
 			return door
-	print('cant find door')
 	return null
 
 
