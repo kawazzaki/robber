@@ -5,11 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://cp2bwaga5yq6l" path="res://scenes/level/rooms/room_1.tscn" id="2_nbgty"]
 [ext_resource type="PackedScene" uid="uid://b1tqv3ao8u7ai" path="res://scenes/level/rooms/room_2.tscn" id="3_i166f"]
 [ext_resource type="Script" uid="uid://c76djxuk63ab4" path="res://scripts/level/graph_pathfinding.gd" id="4_qkmgm"]
+[ext_resource type="PackedScene" uid="uid://deohr0m0ofda8" path="res://scenes/level/rooms/room_3.tscn" id="5_vpf64"]
+[ext_resource type="Script" uid="uid://c60li2mjclhtg" path="res://scripts/level/puzzle_generator.gd" id="7_wcngd"]
 
 [node name="level" type="Node3D" unique_id=1739120869 node_paths=PackedStringArray("parent")]
 script = ExtResource("1_h3e3j")
 start_room_scene = ExtResource("2_hnne4")
-rooms_scenes = Array[PackedScene]([ExtResource("2_nbgty"), ExtResource("3_i166f")])
+rooms_scenes = Array[PackedScene]([ExtResource("2_nbgty"), ExtResource("3_i166f"), ExtResource("5_vpf64")])
 parent = NodePath("rooms")
 max_rooms = 2
 grap = 0.55
@@ -19,4 +21,8 @@ grap = 0.55
 [node name="graphPathfinding" type="Node" parent="." unique_id=23275236]
 script = ExtResource("4_qkmgm")
 
+[node name="puzzle_generator" type="Node" parent="." unique_id=1773210913]
+script = ExtResource("7_wcngd")
+
 [connection signal="finish_build" from="." to="graphPathfinding" method="build_finished"]
+[connection signal="finish_pathFinfing" from="graphPathfinding" to="puzzle_generator" method="_on_graph_pathfinding_finish_path_finfing"]

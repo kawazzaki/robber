@@ -1,5 +1,6 @@
 extends Node
 
+signal finish_pathFinfing(r : Array)
 
 var start_room: Room
 var finish_room: Room
@@ -115,6 +116,7 @@ func build_finished(r: Array) -> void:
 	if finish_room:
 		path = find_path(start_room, finish_room)
 		print("Path length: ", path.size())
+		finish_pathFinfing.emit(rooms)
 	else:
 		push_error("Could not find a farthest room.")
 

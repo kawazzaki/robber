@@ -18,6 +18,15 @@ var parent : Room
 var children : Array[Room]
 
 var depth: int = 0
+var room_type: String = "normal"
+var puzzle : Dictionary
+# each puzzle:
+# {
+#   "id": "puzzle_0",
+#   "problem_room": Room,  <- the lock/puzzle is here
+#   "solution_room": Room, <- the item/solution is here
+#   "solved": false
+# }
 
 
 func clear():
@@ -56,6 +65,12 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	DebugDraw3D.draw_text(self.global_position + Vector3.UP * 2 , "depth : " + str(depth) ,144,Color.WHITE)
+	if puzzle:
+		if puzzle["problem_room"] == self:
+			DebugDraw3D.draw_text(self.global_position + Vector3.UP * 3 + Vector3.FORWARD , "problem : " + str(puzzle["id"] ) ,124,Color.GREEN_YELLOW)
+		else:
+			DebugDraw3D.draw_text(self.global_position + Vector3.UP * 3 + Vector3.FORWARD , "solution : " + str(puzzle["id"]) ,124,Color.GREEN_YELLOW)
+		
 	if doors.is_empty():return
 	for door in doors:
 		DebugDraw3D.draw_arrow(door["obj"].global_position,door["obj"].global_position + door["dir"]*0.7, Color.BLUE,0.1)

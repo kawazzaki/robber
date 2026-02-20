@@ -10,4 +10,4 @@ script = ExtResource("2_a8pr3")
 metadata/_custom_type_script = "uid://c5u4i0w64v4j"
 
 [node name="level" parent="." unique_id=1739120869 instance=ExtResource("2_rgld7")]
-max_rooms = 20
+max_rooms = 30
