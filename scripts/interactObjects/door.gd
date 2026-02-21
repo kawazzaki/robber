@@ -28,5 +28,5 @@ func interact(player: Player) -> void:
 
 
 
-
-	DebugDraw3D.draw_line(center.global_position,center.global_position - center.global_basis.z)
+func _process(delta: float) -> void:
+	DebugDraw3D.draw_line(center.global_position,center.global_position - center.global_basis.z,Color.WHITE_SMOKE)
