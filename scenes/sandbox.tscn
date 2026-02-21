@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://k444sjpxsojq"]
 
-[ext_resource type="Script" uid="uid://c5u4i0w64v4j" path="res://addons/debug_camera/scripts/DebugCamera3D.gd" id="2_a8pr3"]
 [ext_resource type="PackedScene" uid="uid://ghaal2y00mcf" path="res://scenes/level/level.tscn" id="2_rgld7"]
+[ext_resource type="PackedScene" uid="uid://c3age8nnvcka1" path="res://scenes/interactObjects/door.tscn" id="3_a8pr3"]
+[ext_resource type="PackedScene" uid="uid://d6yj8m5rfg0u" path="res://scenes/player/player.tscn" id="3_j6lu3"]
 
 [node name="sandbox" type="Node3D" unique_id=1549288505]
 
-[node name="DebugCamera3D" type="Camera3D" parent="." unique_id=1796059743]
-script = ExtResource("2_a8pr3")
-metadata/_custom_type_script = "uid://c5u4i0w64v4j"
-
 [node name="level" parent="." unique_id=1739120869 instance=ExtResource("2_rgld7")]
 max_rooms = 30
+
+[node name="player" parent="." unique_id=1959322312 instance=ExtResource("3_j6lu3")]
+
+[node name="door" parent="." unique_id=970612141 instance=ExtResource("3_a8pr3")]

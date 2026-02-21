@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://c3age8nnvcka1"]
+
+[ext_resource type="Script" uid="uid://bfyv7x3hga5ww" path="res://scripts/interactObjects/door.gd" id="1_g43iq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g43iq"]
+shading_mode = 0
+albedo_color = Color(1, 1, 0.48235294, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_g43iq"]
+size = Vector3(2, 3, 0.1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_g43iq"]
+data = PackedVector3Array(-1, 1.5, 0.049999997, 1, 1.5, 0.049999997, -1, -1.5, 0.049999997, 1, 1.5, 0.049999997, 1, -1.5, 0.049999997, -1, -1.5, 0.049999997, 1, 1.5, -0.049999997, -1, 1.5, -0.049999997, 1, -1.5, -0.049999997, -1, 1.5, -0.049999997, -1, -1.5, -0.049999997, 1, -1.5, -0.049999997, 1, 1.5, 0.049999997, 1, 1.5, -0.049999997, 1, -1.5, 0.049999997, 1, 1.5, -0.049999997, 1, -1.5, -0.049999997, 1, -1.5, 0.049999997, -1, 1.5, -0.049999997, -1, 1.5, 0.049999997, -1, -1.5, -0.049999997, -1, 1.5, 0.049999997, -1, -1.5, 0.049999997, -1, -1.5, -0.049999997, 1, 1.5, 0.049999997, -1, 1.5, 0.049999997, 1, 1.5, -0.049999997, -1, 1.5, 0.049999997, -1, 1.5, -0.049999997, 1, 1.5, -0.049999997, -1, -1.5, 0.049999997, 1, -1.5, 0.049999997, -1, -1.5, -0.049999997, 1, -1.5, 0.049999997, 1, -1.5, -0.049999997, -1, -1.5, -0.049999997)
+
+[node name="door" type="StaticBody3D" unique_id=970612141]
+script = ExtResource("1_g43iq")
+metadata/_custom_type_script = "uid://bhju8md5nlt77"
+
+[node name="body" type="MeshInstance3D" parent="." unique_id=1494838584]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.5, 0)
+material_override = SubResource("StandardMaterial3D_g43iq")
+mesh = SubResource("BoxMesh_g43iq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1761693774]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.5, 0)
+shape = SubResource("ConcavePolygonShape3D_g43iq")
