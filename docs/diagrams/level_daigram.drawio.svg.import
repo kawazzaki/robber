@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cthkxu30w6m80"
-path="res://.godot/imported/Screenshot_3.png-5d65df7e03d95cad706665813adf8b26.ctex"
+uid="uid://ccbkeded5cp1k"
+path="res://.godot/imported/level_daigram.drawio.svg-474e9616d0fa075831d4432c49ed90c6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://docs/imgs/Screenshot_3.png"
-dest_files=["res://.godot/imported/Screenshot_3.png-5d65df7e03d95cad706665813adf8b26.ctex"]
+source_file="res://docs/diagrams/level_daigram.drawio.svg"
+dest_files=["res://.godot/imported/level_daigram.drawio.svg-474e9616d0fa075831d4432c49ed90c6.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false
