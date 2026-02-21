@@ -30,7 +30,6 @@ func clear():
 
 func build():
 	clear()
-	DebugConsole.log("start_generating")
 	add_start_room()
 	await generate_rooms()
 	finish_build.emit(rooms,connections)
