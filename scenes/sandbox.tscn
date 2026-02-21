@@ -1,14 +1,11 @@
 [gd_scene format=3 uid="uid://k444sjpxsojq"]
 
 [ext_resource type="PackedScene" uid="uid://ghaal2y00mcf" path="res://scenes/level/level.tscn" id="2_rgld7"]
-[ext_resource type="PackedScene" uid="uid://c3age8nnvcka1" path="res://scenes/interactObjects/door.tscn" id="3_a8pr3"]
 [ext_resource type="PackedScene" uid="uid://d6yj8m5rfg0u" path="res://scenes/player/player.tscn" id="3_j6lu3"]
 
 [node name="sandbox" type="Node3D" unique_id=1549288505]
 
 [node name="level" parent="." unique_id=1739120869 instance=ExtResource("2_rgld7")]
-max_rooms = 30
+max_rooms = 4
 
 [node name="player" parent="." unique_id=1959322312 instance=ExtResource("3_j6lu3")]
-
-[node name="door" parent="." unique_id=970612141 instance=ExtResource("3_a8pr3")]

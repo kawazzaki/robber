@@ -65,6 +65,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	DebugDraw3D.draw_text(self.global_position + Vector3.UP * 2 , "depth : " + str(depth) ,144,Color.WHITE)
+	DebugDraw3D.draw_text(self.global_position + Vector3.UP * 1 , str(name) ,144,Color.WHITE)
 	if puzzle:
 		if puzzle["problem_room"] == self:
 			DebugDraw3D.draw_text(self.global_position + Vector3.UP * 3 + Vector3.FORWARD , "problem : " + str(puzzle["id"] ) ,124,Color.GREEN_YELLOW)

@@ -12,7 +12,7 @@ func _ready() -> void:
         player = state_machine.get_parent()
 
 
-func start():print(name)
+func start():pass
 func exit():pass
 func update(delta :float):pass
 func pyhsics_update(delta:float):pass

@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://c76djxuk63ab4" path="res://scripts/level/graph_pathfinding.gd" id="4_qkmgm"]
 [ext_resource type="PackedScene" uid="uid://deohr0m0ofda8" path="res://scenes/level/rooms/room_3.tscn" id="5_vpf64"]
 [ext_resource type="Script" uid="uid://c60li2mjclhtg" path="res://scripts/level/puzzle_generator.gd" id="7_wcngd"]
+[ext_resource type="Script" uid="uid://dakpf0gjhfn7h" path="res://scripts/level/add_doors.gd" id="8_xv074"]
+[ext_resource type="PackedScene" uid="uid://c3age8nnvcka1" path="res://scenes/interactObjects/door.tscn" id="9_sytrn"]
 
 [node name="level" type="Node3D" unique_id=1739120869 node_paths=PackedStringArray("parent")]
 script = ExtResource("1_h3e3j")
@@ -24,5 +26,10 @@ script = ExtResource("4_qkmgm")
 [node name="puzzle_generator" type="Node" parent="." unique_id=1773210913]
 script = ExtResource("7_wcngd")
 
+[node name="add_doors" type="Node" parent="." unique_id=1481863015]
+script = ExtResource("8_xv074")
+door_scene = ExtResource("9_sytrn")
+
 [connection signal="finish_build" from="." to="graphPathfinding" method="build_finished"]
+[connection signal="finish_build" from="." to="add_doors" method="_on_level_finish_build"]
 [connection signal="finish_pathFinfing" from="graphPathfinding" to="puzzle_generator" method="_on_graph_pathfinding_finish_path_finfing"]

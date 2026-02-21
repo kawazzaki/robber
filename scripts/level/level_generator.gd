@@ -1,6 +1,6 @@
 extends Node3D
 
-signal finish_build(r : Array)
+signal finish_build(r : Array , c : Array)
 
 @export var start_room_scene : PackedScene
 @export var rooms_scenes : Array[PackedScene]
@@ -16,7 +16,7 @@ const SCALES = [
 	Vector3(1,1,1),Vector3(1,1,-1),Vector3(-1,1,1)
 ]
 
-
+var connections = []
 
 
 ########
@@ -25,6 +25,7 @@ func clear():
 		room.clear()
 		room.queue_free()
 	rooms.clear()
+	connections.clear()
 
 
 func build():
@@ -32,7 +33,8 @@ func build():
 	DebugConsole.log("start_generating")
 	add_start_room()
 	await generate_rooms()
-	finish_build.emit(rooms)
+	finish_build.emit(rooms,connections)
+
 
 
 
@@ -107,6 +109,7 @@ func spawn_room(scene : PackedScene, pos : Vector3, dir : Vector3,parent_room : 
 	rooms.append(room)
 	parent_room.children.append(room)
 	room.parent = parent_room
+	connections.append([room,door_info])
 	return true
 
 
