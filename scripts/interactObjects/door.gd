@@ -9,7 +9,7 @@ func _ready() -> void:
 
 func interact(player: Player) -> void:
 	var player_dir = (player.global_position - global_position).normalized()
-	var door_forward = -transform.basis.z
+	var door_forward = transform.basis.z.normalized()
 	var dot = player_dir.dot(door_forward)
 
 	var tween = create_tween()
@@ -25,6 +25,6 @@ func interact(player: Player) -> void:
 		is_opened = false
 
 func interact_update():
-	
-	#DebugDraw3D.draw_line(global_position,global_position + door_forward,Color.AQUA)
+	var pos = global_position + Vector3(1,1.5,0)
+	DebugDraw3D.draw_line(pos,pos + global_basis.z ,Color.AQUA)
 	pass
