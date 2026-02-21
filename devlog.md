@@ -21,4 +21,4 @@
 2/20/2026
 - ajoutit room 
 - playersystem , stateMachime , interactSystem Basic
-- interactObjects Class , door
+- interactObjects Class , door(tn9ad system li generer door f level)
