@@ -12,11 +12,13 @@
 - t9ad path_grafinding system including f level generator (basics)  
 
 ---
+
 2/19/2026
--build start room f blender
--simple puzzle system 
+- build start room f blender
+- simple puzzle system 
+
 ---
 2/20/2026
--ajoutit room 
--playersystem , stateMachime , interactSystem Basic
--interactObjects Class , door
+- ajoutit room 
+- playersystem , stateMachime , interactSystem Basic
+- interactObjects Class , door
