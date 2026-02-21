@@ -8,13 +8,15 @@ class_name Player
 @export var state_machine : StateMachine
 @export var head : Node3D
 @export var aim_raycast : RayCast3D
-
+@export var interact_system : Node
 @export_category("States")
 @export var s_idle : State
 @export var s_run : State
 
-@export_category("variables")
-#nothing for now
+
+
+
+
 
 var move_speed : float = 10
 var rotation_speed : float = 1

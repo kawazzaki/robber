@@ -5,7 +5,7 @@ extends Node
 @onready var player : Player = self.get_parent()
 
 
-
+var requirement : String = "key"
 
 
 func _process(delta: float) -> void:

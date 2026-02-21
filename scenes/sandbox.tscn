@@ -10,6 +10,7 @@
 max_rooms = 4
 
 [node name="player" parent="." unique_id=1959322312 instance=ExtResource("3_j6lu3")]
+ConditionIHave = "key"
 
 [node name="door" parent="." unique_id=970612141 instance=ExtResource("3_a8pr3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.40447)

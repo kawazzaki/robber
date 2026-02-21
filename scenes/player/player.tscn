@@ -9,11 +9,12 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7p2l"]
 
-[node name="player" type="CharacterBody3D" unique_id=1959322312 node_paths=PackedStringArray("state_machine", "head", "aim_raycast", "s_idle", "s_run")]
+[node name="player" type="CharacterBody3D" unique_id=1959322312 node_paths=PackedStringArray("state_machine", "head", "aim_raycast", "interact_system", "s_idle", "s_run")]
 script = ExtResource("1_dovo2")
 state_machine = NodePath("stateMachine")
 head = NodePath("head")
 aim_raycast = NodePath("head/camera/aim")
+interact_system = NodePath("interact_system")
 s_idle = NodePath("stateMachine/idle")
 s_run = NodePath("stateMachine/run")
 
