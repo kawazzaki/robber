@@ -3,20 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://d6yj8m5rfg0u" path="res://scenes/player/player.tscn" id="2_a8pr3"]
 [ext_resource type="PackedScene" uid="uid://ghaal2y00mcf" path="res://scenes/level/level.tscn" id="2_rgld7"]
 [ext_resource type="PackedScene" uid="uid://c3age8nnvcka1" path="res://scenes/interactObjects/door.tscn" id="3_a8pr3"]
-[ext_resource type="Shader" uid="uid://c23wx8f0mnpkq" path="res://shaders/psx_crt.gdshader" id="4_j6lu3"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j6lu3"]
-shader = ExtResource("4_j6lu3")
-shader_parameter/pixel_resolution = 307.7890115799775
-shader_parameter/color_steps = 32
-shader_parameter/noise_strength = 0.3170000150575
-shader_parameter/enable_dither = true
-shader_parameter/dither_strength = 0.3
-shader_parameter/enable_glow = false
-shader_parameter/glow_strength = 0.4
-shader_parameter/glow_spread = 0.005
-shader_parameter/enable_vintage = true
-shader_parameter/vintage_strength = 0.8
+[ext_resource type="Script" uid="uid://c2fntkw60oicx" path="res://scripts/multiplayer/multiplayer.gd" id="3_j6lu3"]
 
 [node name="sandbox" type="Node3D" unique_id=1549288505]
 
@@ -26,14 +13,9 @@ max_rooms = 5
 [node name="door" parent="." unique_id=970612141 instance=ExtResource("3_a8pr3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 
-[node name="player" parent="." unique_id=1959322312 instance=ExtResource("2_a8pr3")]
+[node name="multiplayer" type="Node" parent="." unique_id=179240804 node_paths=PackedStringArray("player_spawner")]
+script = ExtResource("3_j6lu3")
+player_scene = ExtResource("2_a8pr3")
+player_spawner = NodePath("../spawner")
 
-[node name="psx_filtre" type="ColorRect" parent="." unique_id=1855132812]
-material = SubResource("ShaderMaterial_j6lu3")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(1318, 700)
-mouse_filter = 2
+[node name="spawner" type="Node3D" parent="." unique_id=974140260]

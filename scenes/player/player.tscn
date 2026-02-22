@@ -9,12 +9,22 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7p2l"]
 
-[node name="player" type="CharacterBody3D" unique_id=1959322312 node_paths=PackedStringArray("state_machine", "head", "aim_raycast", "interact_system", "s_idle", "s_run")]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_75vfm"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="player" type="CharacterBody3D" unique_id=1959322312 node_paths=PackedStringArray("state_machine", "head", "aim_raycast", "interact_system", "camera", "s_idle", "s_run")]
+collision_layer = 2
 script = ExtResource("1_dovo2")
 state_machine = NodePath("stateMachine")
 head = NodePath("head")
 aim_raycast = NodePath("head/camera/aim")
 interact_system = NodePath("interact_system")
+camera = NodePath("head/camera")
 s_idle = NodePath("stateMachine/idle")
 s_run = NodePath("stateMachine/run")
 
@@ -45,3 +55,6 @@ metadata/_custom_type_script = "uid://2t3v02t13brm"
 [node name="interact_system" type="Node" parent="." unique_id=137866573]
 script = ExtResource("6_75vfm")
 requirement = "nail_puller"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1952337538]
+replication_config = SubResource("SceneReplicationConfig_75vfm")
