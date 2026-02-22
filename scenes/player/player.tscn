@@ -44,3 +44,4 @@ metadata/_custom_type_script = "uid://2t3v02t13brm"
 
 [node name="interact_system" type="Node" parent="." unique_id=137866573]
 script = ExtResource("6_75vfm")
+requirement = "nail_puller"
