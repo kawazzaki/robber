@@ -18,7 +18,7 @@ var parent : Room
 var children : Array[Room]
 
 var depth: int = 0
-var room_type: String = "normal"
+@export var room_type: String
 var puzzle : Dictionary
 # each puzzle:
 # {
@@ -50,13 +50,14 @@ func set_doors_direction():
 			"to_center":self.global_position - l.global_position
 		})
 
-func get_door_by_dir(dir : Vector3):
+func get_door_by_dir(dir: Vector3) -> Dictionary:
+	var matches = []
 	for door in doors:
 		if dir.is_equal_approx(door["dir"]):
-			return door
-	return null
-
-
+			matches.append(door)
+	if matches.is_empty():
+		return {}
+	return matches.pick_random()
 
 func _ready() -> void:
 	DebugConsole.add_command("br",build,self)

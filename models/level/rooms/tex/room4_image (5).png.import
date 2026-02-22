@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://br7nq3ved4l6h"
-path.s3tc="res://.godot/imported/room3_trak-greyplaster-4.jpg-6775ee05753a60393f08f736fa917822.s3tc.ctex"
+uid="uid://dr2iqx4r5pawi"
+path.s3tc="res://.godot/imported/room4_image (5).png-b399d6a054dd8062e8a78ca7f2a5d998.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "636b31429cc4d3869c3f646c6407ce18"
+"md5": "b95af0652d711ad7065ce346fc4c05f7"
 }
 
 [deps]
 
-source_file="res://models/level/rooms/room3_trak-greyplaster-4.jpg"
-dest_files=["res://.godot/imported/room3_trak-greyplaster-4.jpg-6775ee05753a60393f08f736fa917822.s3tc.ctex"]
+source_file="res://models/level/rooms/tex/room4_image (5).png"
+dest_files=["res://.godot/imported/room4_image (5).png-b399d6a054dd8062e8a78ca7f2a5d998.s3tc.ctex"]
 
 [params]
 

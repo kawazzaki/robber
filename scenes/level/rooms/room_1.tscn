@@ -67,6 +67,7 @@ size = Vector3(16, 4, 10)
 [node name="room1" type="StaticBody3D" unique_id=920208201 node_paths=PackedStringArray("links")]
 script = ExtResource("1_uwpvd")
 links = NodePath("links")
+room_type = "room1"
 metadata/_custom_type_script = "uid://dmgamb2niryx5"
 
 [node name="body" type="MeshInstance3D" parent="." unique_id=649345365]

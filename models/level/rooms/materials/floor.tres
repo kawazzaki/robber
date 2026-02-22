@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://ck8qrd76omi5a"]
 
-[ext_resource type="Texture2D" uid="uid://dnx010u7t831j" path="res://models/level/rooms/room2_image (3).png" id="1_sutrf"]
+[ext_resource type="Texture2D" uid="uid://dnx010u7t831j" path="res://models/level/rooms/tex/room2_image (3).png" id="1_sutrf"]
 
 [resource]
 resource_name = "floor"

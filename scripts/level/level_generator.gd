@@ -55,49 +55,66 @@ func generate_rooms() -> void:
 
 func _generate_rooms_async():
 	var tries : int = 0
+	var queue : Array = [rooms[0]]
 
 	while rooms.size() < max_rooms and tries < max_rooms * 200:
 		tries += 1
-		var parent_room : Room = rooms.pick_random()
-		if parent_room == null or parent_room.doors.is_empty():
-			continue
 
-		var available_doors = parent_room.doors.duplicate()
-		if available_doors.is_empty():
-			continue
+		while not queue.is_empty() and queue[0].doors.is_empty():
+			queue.pop_front()
 
-		var door_info = available_doors.pick_random()
+		if queue.is_empty():
+			break
+
+		var parent_room : Room = queue[0]
+		var door_info = parent_room.doors.pick_random()
 		var dir = door_info["dir"]
 
-		var new_scene = rooms_scenes.pick_random()
+		var new_scene = pick_different_room(parent_room)
 		var new_pos = parent_room.global_position - door_info["to_center"] + dir * grap
-
-		var spawned = await spawn_room(new_scene, new_pos, dir,parent_room)
+		var spawned = await spawn_room(new_scene, new_pos, dir, parent_room)
 		if spawned:
 			parent_room.doors.erase(door_info)
+			queue.append(rooms.back())
+		else:
+			# this door failed, remove it so we don't try it again
+			parent_room.doors.erase(door_info)
+			# if parent has no more doors, move on to next room in queue
+			if parent_room.doors.is_empty():
+				queue.pop_front()
+
+func pick_different_room(parent_room : Room) -> PackedScene:
+	var filtered = rooms_scenes.filter(func(scene):
+		var temp = scene.instantiate()
+		var type = temp.room_type
+		temp.free()
+		return type != parent_room.room_type
+	)
+	if filtered.is_empty():
+		return rooms_scenes.pick_random()  # fallback if no other types available
+	return filtered.pick_random()
 
 
-
-func spawn_room(scene : PackedScene, pos : Vector3, dir : Vector3,parent_room : Room) -> bool:
+func spawn_room(scene : PackedScene, pos : Vector3, dir : Vector3, parent_room : Room) -> bool:
 	var room : Room = scene.instantiate()
 	parent.add_child(room)
 
 	room.global_position = pos
 	room.build()
 
-	var door_info = room.get_door_by_dir(-dir)
+	var door_info : Dictionary = room.get_door_by_dir(-dir)
 	var rotate_tries := 0
-	while door_info == null and rotate_tries < 10:
+	while door_info.is_empty() and rotate_tries < 10:
 		rotate_tries += 1
 		rotate_room(room)
 		room.clear()
 		room.build()
 		door_info = room.get_door_by_dir(-dir)
 
-	if door_info == null:
+	if door_info.is_empty():
 		room.queue_free()
 		return false
-	
+
 	room.global_position += door_info["to_center"]
 
 	if not await can_spawn(room):
@@ -108,14 +125,14 @@ func spawn_room(scene : PackedScene, pos : Vector3, dir : Vector3,parent_room : 
 	rooms.append(room)
 	parent_room.children.append(room)
 	room.parent = parent_room
-	connections.append([room,door_info])
+	connections.append([room, door_info])
 	return true
-
 
 
 func can_spawn(room : Room):
 	var detector : Area3D = room.get_node("detector")
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().physics_frame
+	await get_tree().physics_frame
 	var bodies = detector.get_overlapping_bodies()
 	detector.queue_free()
 	for b in bodies:

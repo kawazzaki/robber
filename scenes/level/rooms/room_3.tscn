@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://deohr0m0ofda8"]
 
 [ext_resource type="Script" uid="uid://dmgamb2niryx5" path="res://scripts/level/room.gd" id="1_y3vly"]
-[ext_resource type="Texture2D" uid="uid://br7nq3ved4l6h" path="res://models/level/rooms/room3_trak-greyplaster-4.jpg" id="2_c1x6m"]
-[ext_resource type="Texture2D" uid="uid://dbdq8duwulsy7" path="res://models/level/rooms/room3_trak2_tile1b.png" id="3_45dnv"]
+[ext_resource type="Texture2D" uid="uid://br7nq3ved4l6h" path="res://models/level/rooms/tex/room3_trak-greyplaster-4.jpg" id="2_c1x6m"]
+[ext_resource type="Texture2D" uid="uid://dbdq8duwulsy7" path="res://models/level/rooms/tex/room3_trak2_tile1b.png" id="3_45dnv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eaxn1"]
 resource_name = "wall"
@@ -81,6 +81,7 @@ size = Vector3(12, 4, 12)
 [node name="room3" type="StaticBody3D" unique_id=757682702 node_paths=PackedStringArray("links")]
 script = ExtResource("1_y3vly")
 links = NodePath("links")
+room_type = "room3"
 metadata/_custom_type_script = "uid://dmgamb2niryx5"
 
 [node name="body" type="MeshInstance3D" parent="." unique_id=1087251042]

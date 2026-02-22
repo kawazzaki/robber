@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://baupu0etepju6"
-path.s3tc="res://.godot/imported/room2_image (2).png-e2ae4c5011ef27dec2cf872155f937e9.s3tc.ctex"
+uid="uid://6ux6fqntpx8u"
+path.s3tc="res://.godot/imported/room0_image (5).png-dcefde25b84f41f30c625e93f81165d3.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "582bb6f4eccbc3eb608d58efdef7cb2c"
+"md5": "b95af0652d711ad7065ce346fc4c05f7"
 }
 
 [deps]
 
-source_file="res://models/level/rooms/room2_image (2).png"
-dest_files=["res://.godot/imported/room2_image (2).png-e2ae4c5011ef27dec2cf872155f937e9.s3tc.ctex"]
+source_file="res://models/level/rooms/tex/room0_image (5).png"
+dest_files=["res://.godot/imported/room0_image (5).png-dcefde25b84f41f30c625e93f81165d3.s3tc.ctex"]
 
 [params]
 

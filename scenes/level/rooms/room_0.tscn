@@ -68,6 +68,7 @@ data = PackedVector3Array(-0.59999996, 0.19999999, -1, -1, 0.2667, -1, -0.599999
 [node name="room_0" type="StaticBody3D" unique_id=1028020983 node_paths=PackedStringArray("links")]
 script = ExtResource("1_yd0cr")
 links = NodePath("links")
+room_type = "start"
 metadata/_custom_type_script = "uid://dmgamb2niryx5"
 
 [node name="links" type="Node3D" parent="." unique_id=753277881]
