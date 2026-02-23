@@ -17,11 +17,12 @@ var current_tween : Tween
 
 
 func _ready() -> void:
-	original_rotation = rotation_degrees
+	original_rotation = global_rotation_degrees
+	
 
 func interact(player: Player) -> void:
 	if has_borders: return
-	if player.interact_system.requirement == condition: isLocked = false
+	if isLocked and player.interact_system.requirement == condition: isLocked = false
 	if isLocked: return
 	toggle_door.rpc()
 
@@ -38,7 +39,7 @@ func toggle_door():
 	if current_tween:
 		current_tween.kill()
 	current_tween = create_tween()
-	current_tween.tween_property(self, "rotation_degrees", new_rotation, 0.2)
+	current_tween.tween_property(self, "global_rotation_degrees", new_rotation, 0.2)
 
 func add_borders(rng: RandomNumberGenerator):
 	var spacing = 0.7

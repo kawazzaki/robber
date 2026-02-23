@@ -19,4 +19,4 @@ level = NodePath("../level")
 [node name="spawner" type="Node3D" parent="." unique_id=974140260]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=679334961]
-_spawnable_scenes = PackedStringArray("<null>")
+_spawnable_scenes = PackedStringArray("uid://d6yj8m5rfg0u")

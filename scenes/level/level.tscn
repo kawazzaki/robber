@@ -28,6 +28,3 @@ script = ExtResource("4_qkmgm")
 [node name="add_doors" type="Node" parent="." unique_id=1481863015]
 script = ExtResource("8_xv074")
 door_scene = ExtResource("9_sytrn")
-
-[connection signal="finish_build" from="." to="graphPathfinding" method="build_finished"]
-[connection signal="finish_build" from="." to="add_doors" method="_on_level_finish_build"]

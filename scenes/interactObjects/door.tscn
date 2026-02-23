@@ -59,13 +59,15 @@ properties/1/replication_mode = 1
 properties/2/path = NodePath(".:is_opened")
 properties/2/spawn = true
 properties/2/replication_mode = 1
+properties/3/path = NodePath(".:rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 1
 
 [node name="door" type="StaticBody3D" unique_id=970612141 node_paths=PackedStringArray("center")]
 script = ExtResource("1_g43iq")
 center = NodePath("center")
 border_scene = ExtResource("2_o36oo")
 isLocked = false
-has_borders = false
 borders_count = 3
 border_offset = 0.3
 condition = "key"
