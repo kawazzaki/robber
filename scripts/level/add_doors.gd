@@ -2,7 +2,7 @@ extends Node
 
 @export var door_scene : PackedScene
 
-func spawn_door(info : Array):
+func spawn_door(info : Array , rng : RandomNumberGenerator):
     var door : StaticBody3D = door_scene.instantiate()
     var room : Room = info[0]
     var door_info : Dictionary = info[1]
@@ -16,9 +16,11 @@ func spawn_door(info : Array):
     door.global_rotation.y = angle
     door.global_position = room.global_position - door_info["to_center"] + door_info["dir"] * 0.3 - door.transform.basis.x
 
-func build_finished(r: Array, c: Array) -> void:
+    if door.has_borders:door.add_borders(rng)
+
+func build_finished(c: Array , rng:RandomNumberGenerator) -> void:
     for i in c.size():
-        spawn_door(c[i])
+        spawn_door(c[i],rng)
 
 
 

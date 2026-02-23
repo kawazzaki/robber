@@ -1,6 +1,6 @@
 extends Node3D
 
-signal finish_build(r : Array , c : Array)
+class_name Level
 
 @export var start_room_scene : PackedScene
 @export var rooms_scenes : Array[PackedScene]
@@ -11,11 +11,6 @@ signal finish_build(r : Array , c : Array)
 @export_category("components")
 @export var pathFinding : Node
 @export var addDoors : Node
-
-
-
-
-
 
 var rooms = []
 
@@ -28,6 +23,7 @@ const SCALES = [
 
 var connections = []
 
+var rng = RandomNumberGenerator.new()
 
 ########
 func clear():
@@ -38,14 +34,14 @@ func clear():
 	connections.clear()
 
 
-func build():
+func build(seed : int):
+	rng.seed = seed
+	print(seed)
 	clear()
 	add_start_room()
 	await generate_rooms()
-	pathFinding.build_finished(rooms,connections)
-	addDoors.build_finished(rooms,connections)
-
-
+	pathFinding.build_finished(rooms)
+	addDoors.build_finished(connections,rng)
 
 
 func add_start_room():
@@ -57,7 +53,7 @@ func add_start_room():
 	rooms.append(room)
 
 func rotate_room(room : Room):
-	var scale = SCALES.pick_random()
+	var scale = SCALES[rng.randi_range(0, SCALES.size() - 1)]
 	room.scale = scale
 
 
@@ -78,7 +74,7 @@ func _generate_rooms_async():
 			break
 
 		var parent_room : Room = queue[0]
-		var door_info = parent_room.doors.pick_random()
+		var door_info = parent_room.doors[rng.randi_range(0, parent_room.doors.size() - 1)]
 		var dir = door_info["dir"]
 
 		var new_scene = pick_different_room(parent_room)
@@ -88,9 +84,7 @@ func _generate_rooms_async():
 			parent_room.doors.erase(door_info)
 			queue.append(rooms.back())
 		else:
-			# this door failed, remove it so we don't try it again
 			parent_room.doors.erase(door_info)
-			# if parent has no more doors, move on to next room in queue
 			if parent_room.doors.is_empty():
 				queue.pop_front()
 
@@ -102,8 +96,8 @@ func pick_different_room(parent_room : Room) -> PackedScene:
 		return type != parent_room.room_type
 	)
 	if filtered.is_empty():
-		return rooms_scenes.pick_random()  # fallback if no other types available
-	return filtered.pick_random()
+		return rooms_scenes[rng.randi_range(0, rooms_scenes.size() - 1)]
+	return filtered[rng.randi_range(0, filtered.size() - 1)]
 
 
 func spawn_room(scene : PackedScene, pos : Vector3, dir : Vector3, parent_room : Room) -> bool:
@@ -152,5 +146,3 @@ func can_spawn(room : Room):
 	room.get_node("coll").disabled = false
 	return true
 
-func _ready() -> void:
-	DebugConsole.add_command("bl",build,self)

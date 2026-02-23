@@ -17,29 +17,29 @@ var borders = []
 
 func _ready() -> void:
 	original_rotation = rotation_degrees
-	add_borders()
 
 
 
-func interact(player: Player) -> void:
-	if has_borders:return
-	if player.interact_system.requirement == condition : isLocked = false
-	if isLocked:return
-	var new_rotation : Vector3
-	if !is_opened:
-		new_rotation = original_rotation + Vector3(0,-90,0)
-		is_opened = true
-	else:
-		new_rotation = original_rotation 
-		is_opened = false
-	var t = create_tween()
-	t.tween_property(self,"rotation_degrees",new_rotation,0.2)
+
+#func interact(player: Player) -> void:
+#	if has_borders:return
+#	if player.interact_system.requirement == condition : isLocked = false
+#	if isLocked:return
+#	var new_rotation : Vector3
+#	if !is_opened:
+#		new_rotation = original_rotation + Vector3(0,-90,0)
+#		is_opened = true
+#	else:
+#		new_rotation = original_rotation 
+#		is_opened = false
+#	var t = create_tween()
+#	t.tween_property(self,"rotation_degrees",new_rotation,0.2)
 
 
-func add_borders():
+func add_borders(rng : RandomNumberGenerator):
 	var spacing = 0.7  
 	
-	borders_count = randi_range(1,3)
+	borders_count = rng.randi_range(1,3)
 
 	var total_height = (borders_count - 1) * spacing
 	var start_y = total_height / 2.0
@@ -49,13 +49,13 @@ func add_borders():
 		center.add_child(border)
 
 		
-		var y_pos = start_y - i * spacing + randf_range(-0.05, 0.05)
-		var x_jitter = randf_range(-0.02, 0.02)  # slight horizontal drift
+		var y_pos = start_y - i * spacing + rng.randf_range(-0.05, 0.05)
+		var x_jitter = rng.randf_range(-0.02, 0.02)  # slight horizontal drift
 
 		border.position -= center.transform.basis.z * border_offset
 		border.position += Vector3(x_jitter, y_pos, 0)
 
-		var tilt = randf_range(-12, 12)
+		var tilt = rng.randf_range(-12, 12)
 		border.rotation_degrees.z = tilt
 
 		borders.append(border)

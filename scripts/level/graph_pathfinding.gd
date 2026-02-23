@@ -107,7 +107,7 @@ func calculate_depths():
 
 
 
-func build_finished(r: Array , c: Array):
+func build_finished(r: Array):
 	clear()
 	start_room = r[0]
 	rooms = r
