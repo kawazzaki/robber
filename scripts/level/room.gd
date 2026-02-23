@@ -10,8 +10,12 @@ var doors = []
 var parent : Room
 var children : Array[Room]
 var depth: int = 0
+<<<<<<< HEAD
 
 @export var room_type: String
+=======
+var room_type: String = "normal"
+>>>>>>> parent of 8cfbc30 (d5.0)
 var puzzle : Dictionary
 
 func clear():
@@ -33,6 +37,7 @@ func set_doors_direction():
 			"to_center": self.global_position - l.global_position
 		})
 
+<<<<<<< HEAD
 func get_door_by_dir(dir: Vector3, rng: RandomNumberGenerator) -> Dictionary:
 	var matches = []
 	for door in doors:
@@ -41,6 +46,15 @@ func get_door_by_dir(dir: Vector3, rng: RandomNumberGenerator) -> Dictionary:
 	if matches.is_empty():
 		return {}
 	return matches[rng.randi_range(0, matches.size() - 1)]
+=======
+func get_door_by_dir(dir : Vector3):
+	for door in doors:
+		if dir.is_equal_approx(door["dir"]):
+			return door
+	return null
+
+
+>>>>>>> parent of 8cfbc30 (d5.0)
 
 func _ready() -> void:
 	DebugConsole.add_command("br", func(): build(RandomNumberGenerator.new()), self)
