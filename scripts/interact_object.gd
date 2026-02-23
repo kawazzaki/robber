@@ -10,13 +10,12 @@ func interact_exit(): lookMe = false
 
 
 func interact(player: Player):
+    interact_rpc.rpc(player.name.to_int())
 
-    interact_rpc.rpc(player.get_multiplayer_authority())
-
-@rpc("authority", "reliable")
-func interact_rpc(player_id: int):
-    
-    print(str(player_id) + " interact with " + str(name))
+@rpc("any_peer","call_local", "reliable")
+func interact_rpc(player_id : int):
+    if multiplayer.is_server():
+        DebugConsole.log("player "+str(player_id) + " interact with " + name)
 
 func _process(delta: float) -> void:
     if lookMe:

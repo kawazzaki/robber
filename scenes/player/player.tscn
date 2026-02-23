@@ -17,6 +17,12 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_75vfm"]
+shading_mode = 0
+albedo_color = Color(1, 0.5921569, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_75vfm"]
+
 [node name="player" type="CharacterBody3D" unique_id=1959322312 node_paths=PackedStringArray("state_machine", "head", "aim_raycast", "interact_system", "camera", "s_idle", "s_run")]
 collision_layer = 2
 script = ExtResource("1_dovo2")
@@ -58,3 +64,8 @@ requirement = "nail_puller"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1952337538]
 replication_config = SubResource("SceneReplicationConfig_75vfm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=280719720]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_75vfm")
+mesh = SubResource("CapsuleMesh_75vfm")

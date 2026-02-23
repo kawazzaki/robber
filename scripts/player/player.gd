@@ -24,6 +24,8 @@ var rotation_speed : float = 1
 var moveInput : Vector2
 
 
+func _enter_tree() -> void:
+	set_multiplayer_authority(str(name).to_int())
 
 func _ready() -> void:
 	if !is_multiplayer_authority():

@@ -49,14 +49,26 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ep685")
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_o36oo"]
+properties/0/path = NodePath(".:isLocked")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:has_borders")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:is_opened")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
 [node name="door" type="StaticBody3D" unique_id=970612141 node_paths=PackedStringArray("center")]
 script = ExtResource("1_g43iq")
+center = NodePath("center")
+border_scene = ExtResource("2_o36oo")
 isLocked = false
+has_borders = false
 borders_count = 3
 border_offset = 0.3
 condition = "key"
-center = NodePath("center")
-border_scene = ExtResource("2_o36oo")
 metadata/_custom_type_script = "uid://bhju8md5nlt77"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1761693774]
@@ -70,3 +82,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.5, 0)
 [node name="door" type="MeshInstance3D" parent="." unique_id=1753595514]
 transform = Transform3D(-1, 0, 0, 0, -1.5, 0, 0, 0, -0.05, 1, 1.5, 0)
 mesh = SubResource("ArrayMesh_dx35v")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=828340071]
+replication_config = SubResource("SceneReplicationConfig_o36oo")
