@@ -51,6 +51,8 @@ shadow_mesh = SubResource("ArrayMesh_ep685")
 
 [node name="door" type="StaticBody3D" unique_id=970612141 node_paths=PackedStringArray("center")]
 script = ExtResource("1_g43iq")
+isLocked = false
+has_borders = false
 borders_count = 3
 border_offset = 0.3
 condition = "key"

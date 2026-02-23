@@ -7,6 +7,10 @@ var port = 6002
 
 @export var player_scene : PackedScene
 @export var player_spawner : Node3D
+@export var level : Level
+
+
+var seed : int = 0
 
 func _ready() -> void:
 	DebugConsole.add_command("host", host_server, self)
@@ -18,7 +22,7 @@ func host_server():
 	multiplayer.multiplayer_peer = peer
 	multiplayer.peer_connected.connect(_peer_connected)
 	add_player(multiplayer.get_unique_id())
-
+	add_level()
 
 func join_server():
 	peer.create_client("localhost", port)
@@ -28,7 +32,9 @@ func _peer_connected(id: int):
 	DebugConsole.log("player " + str(id) + " joined the party")
 	add_player.rpc(id)
 	
-	# tell new player about existing players
+	add_level.rpc_id(id)
+	
+
 	for existing_player in player_spawner.get_children():
 		add_player.rpc_id(id, int(existing_player.name))
 
@@ -38,3 +44,14 @@ func add_player(id: int):
 	player.name = str(id)
 	player.set_multiplayer_authority(id)  
 	player_spawner.add_child(player)
+
+
+@rpc("authority","reliable")
+func add_level():
+	if multiplayer.is_server():
+		if seed != 0:return
+		seed = randi()
+		Global.seed = seed
+		level.build()
+	else:
+		level.build()

@@ -14,6 +14,7 @@ var puzzles: Array = []
 
 @export var graph : Node
 
+var rng = RandomNumberGenerator.new()
 
 func generate(rooms : Array):
 
@@ -69,5 +70,5 @@ func solve(id: String):
 			puzzle["solved"] = true
 			print("Solved: " + id)
 
-func _on_graph_pathfinding_finish_path_finfing(r: Array) -> void:
-	generate(r)
+#func _on_graph_pathfinding_finish_path_finfing(r: Array) -> void:
+#	generate(r)

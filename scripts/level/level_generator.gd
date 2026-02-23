@@ -1,5 +1,7 @@
 extends Node3D
 
+class_name Level
+
 signal finish_build(r : Array , c : Array)
 
 @export var start_room_scene : PackedScene
@@ -7,19 +9,19 @@ signal finish_build(r : Array , c : Array)
 @export var parent : Node
 @export var max_rooms : int = 1
 @export var grap : float = 0.3
+
+
+
+
 var rooms = []
 
-const DIRS = [
-	Vector3.LEFT,Vector3.RIGHT,Vector3.FORWARD,Vector3.BACK
-]
 const SCALES = [
 	Vector3(1,1,1),Vector3(1,1,-1),Vector3(-1,1,1)
 ]
 
 var connections = []
+var rng = RandomNumberGenerator.new()
 
-
-########
 func clear():
 	for room in rooms:
 		room.clear()
@@ -27,28 +29,23 @@ func clear():
 	rooms.clear()
 	connections.clear()
 
-
 func build():
+	rng.seed = Global.seed
 	clear()
 	add_start_room()
 	await generate_rooms()
-	finish_build.emit(rooms,connections)
-
-
-
+	finish_build.emit(rooms, connections)
 
 func add_start_room():
 	var room : Room = start_room_scene.instantiate()
 	parent.add_child(room)
 	room.position = Vector3.ZERO
 	rotate_room(room)
-	room.build()
+	room.build(rng)  # pass the shared rng
 	rooms.append(room)
 
 func rotate_room(room : Room):
-	var scale = SCALES.pick_random()
-	room.scale = scale
-
+	room.scale = SCALES[rng.randi_range(0, SCALES.size() - 1)]
 
 func generate_rooms() -> void:
 	await _generate_rooms_async()
@@ -60,26 +57,34 @@ func _generate_rooms_async():
 	while rooms.size() < max_rooms and tries < max_rooms * 200:
 		tries += 1
 
-		while not queue.is_empty() and queue[0].doors.is_empty():
-			queue.pop_front()
+		while not queue.is_empty():
+			if not is_instance_valid(queue[0]) or queue[0].doors.is_empty():
+				queue.pop_front()
+			else:
+				break
 
 		if queue.is_empty():
 			break
 
 		var parent_room : Room = queue[0]
-		var door_info = parent_room.doors.pick_random()
+		if not is_instance_valid(parent_room):
+			continue
+
+		var door_info = parent_room.doors[rng.randi_range(0, parent_room.doors.size() - 1)]
 		var dir = door_info["dir"]
 
 		var new_scene = pick_different_room(parent_room)
 		var new_pos = parent_room.global_position - door_info["to_center"] + dir * grap
 		var spawned = await spawn_room(new_scene, new_pos, dir, parent_room)
+
+		if not is_instance_valid(parent_room):
+			continue
+
 		if spawned:
 			parent_room.doors.erase(door_info)
 			queue.append(rooms.back())
 		else:
-			# this door failed, remove it so we don't try it again
 			parent_room.doors.erase(door_info)
-			# if parent has no more doors, move on to next room in queue
 			if parent_room.doors.is_empty():
 				queue.pop_front()
 
@@ -91,25 +96,24 @@ func pick_different_room(parent_room : Room) -> PackedScene:
 		return type != parent_room.room_type
 	)
 	if filtered.is_empty():
-		return rooms_scenes.pick_random()  # fallback if no other types available
-	return filtered.pick_random()
-
+		return rooms_scenes[rng.randi_range(0, rooms_scenes.size() - 1)]
+	return filtered[rng.randi_range(0, filtered.size() - 1)]
 
 func spawn_room(scene : PackedScene, pos : Vector3, dir : Vector3, parent_room : Room) -> bool:
 	var room : Room = scene.instantiate()
 	parent.add_child(room)
 
 	room.global_position = pos
-	room.build()
+	room.build(rng)  # pass the shared rng
 
-	var door_info : Dictionary = room.get_door_by_dir(-dir)
+	var door_info : Dictionary = room.get_door_by_dir(-dir, rng)  # pass shared rng
 	var rotate_tries := 0
 	while door_info.is_empty() and rotate_tries < 10:
 		rotate_tries += 1
 		rotate_room(room)
 		room.clear()
-		room.build()
-		door_info = room.get_door_by_dir(-dir)
+		room.build(rng)
+		door_info = room.get_door_by_dir(-dir, rng)
 
 	if door_info.is_empty():
 		room.queue_free()
@@ -128,7 +132,6 @@ func spawn_room(scene : PackedScene, pos : Vector3, dir : Vector3, parent_room :
 	connections.append([room, door_info])
 	return true
 
-
 func can_spawn(room : Room):
 	var detector : Area3D = room.get_node("detector")
 	await get_tree().physics_frame
@@ -140,6 +143,3 @@ func can_spawn(room : Room):
 			return false
 	room.get_node("coll").disabled = false
 	return true
-
-func _ready() -> void:
-	DebugConsole.add_command("bl",build,self)
