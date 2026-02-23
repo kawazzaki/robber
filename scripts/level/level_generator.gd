@@ -7,6 +7,16 @@ signal finish_build(r : Array , c : Array)
 @export var parent : Node
 @export var max_rooms : int = 1
 @export var grap : float = 0.3
+
+@export_category("components")
+@export var pathFinding : Node
+@export var addDoors : Node
+
+
+
+
+
+
 var rooms = []
 
 const DIRS = [
@@ -32,7 +42,8 @@ func build():
 	clear()
 	add_start_room()
 	await generate_rooms()
-	finish_build.emit(rooms,connections)
+	pathFinding.build_finished(rooms,connections)
+	addDoors.build_finished(rooms,connections)
 
 
 

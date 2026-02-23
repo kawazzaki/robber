@@ -16,7 +16,7 @@ func spawn_door(info : Array):
     door.global_rotation.y = angle
     door.global_position = room.global_position - door_info["to_center"] + door_info["dir"] * 0.3 - door.transform.basis.x
 
-func _on_level_finish_build(r: Array, c: Array) -> void:
+func build_finished(r: Array, c: Array) -> void:
     for i in c.size():
         spawn_door(c[i])
 
