@@ -1,76 +1,50 @@
-extends InteractableObject
+extends RequirementInteractable
 
-@export_category("components")
-@export var center : Node3D
-@export var border_scene : PackedScene
-@export_category("variables")
-@export var isLocked = true
-@export var has_borders = true
-@export var open_speed : float = 0.4
-@export var borders_count : int = 1
-@export var border_offset : float
-@export var condition : String
+
+
 var original_rotation : Vector3
-@export var is_opened = false
-var borders = []
-var current_tween : Tween
+var open_rotation : Vector3
 
+var is_open : bool =false
+
+var open_side: int = 1 
+var initialized: bool = false
+
+
+@export var isLocked : bool = false
 
 func _ready() -> void:
-	original_rotation = global_rotation_degrees
-	
+	original_rotation = rotation
+	open_rotation = original_rotation + Vector3(0,-PI/2,0)
 
-func interact(player: Player) -> void:
-	if has_borders: return
-	if isLocked and player.interact_system.requirement == condition: isLocked = false
-	if isLocked: return
-	toggle_door.rpc()
 
-@rpc("any_peer","call_local", "reliable")
-func toggle_door():
-	var new_rotation : Vector3
-	if !is_opened:
-		new_rotation = original_rotation + Vector3(0, 90, 0)
-		is_opened = true
+func interact(player : Player):
+	super.interact(player)
+	if verify_condition(player):isLocked = false
+	if isLocked:return
+	interact_rpc.rpc()
+
+@rpc("any_peer","call_local","reliable")
+func interact_rpc():
+	toggle_door()
+
+
+func toggle_door() -> void:
+	if not initialized:
+		original_rotation = rotation
+		initialized = true
+
+	var tween = create_tween()
+	if is_open:
+		tween.tween_property(self, "rotation", original_rotation, 0.1)
+		is_open = false
 	else:
-		new_rotation = original_rotation
-		is_opened = false
+		tween.tween_property(self, "rotation", original_rotation + Vector3(0, (PI/2) * open_side, 0), 0.1)
+		is_open = true
 
-	if current_tween:
-		current_tween.kill()
-	current_tween = create_tween()
-	current_tween.tween_property(self, "global_rotation_degrees", new_rotation, 0.2)
-
-func add_borders(rng: RandomNumberGenerator):
-	var spacing = 0.7
-	borders_count = rng.randi_range(1, 3)
-	var total_height = (borders_count - 1) * spacing
-	var start_y = total_height / 2.0
-
-	for i in range(borders_count):
-		var border: StaticBody3D = border_scene.instantiate()
-		border.name = "border_" + str(i)
-		center.add_child(border)
-		var y_pos = start_y - i * spacing + rng.randf_range(-0.05, 0.05)
-		var x_jitter = rng.randf_range(-0.02, 0.02)
-		border.position -= center.transform.basis.z * border_offset
-		border.position += Vector3(x_jitter, y_pos, 0)
-		var tilt = rng.randf_range(-12, 12)
-		border.rotation_degrees.z = tilt
-		borders.append(border)
-
-	if borders.is_empty(): return
-	for border in borders:
-		border.border_removed.connect(remove_border)
-
-func remove_border(b):
-	if !has_borders: return
-	b.queue_free()
-	borders_count -= 1
-	borders.erase(b)
-	if borders.is_empty():
-		has_borders = false
 
 func _process(delta: float) -> void:
-	DebugDraw3D.draw_line(center.global_position, center.global_position - center.global_basis.z, Color.WHITE_SMOKE)
-	DebugDraw3D.draw_text(center.global_position - center.global_basis.z, str(has_borders))
+	DebugDraw3D.draw_line(global_position,global_position - transform.basis.z, Color.AZURE)
+	DebugDraw3D.draw_text(global_position - transform.basis.z * 0.5 + Vector3.UP * 1.5 + transform.basis.x, str(original_rotation))
+	DebugDraw3D.draw_text(global_position - transform.basis.z * 0.5 + Vector3.UP * 2.5 + transform.basis.x, str(condtion_name),32,Color.WHEAT)
+	DebugDraw3D.draw_text(global_position - transform.basis.z * 0.5 + Vector3.UP * 2 + transform.basis.x, "L: " +str(isLocked),32,Color.BISQUE)

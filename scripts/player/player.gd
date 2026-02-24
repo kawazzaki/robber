@@ -24,26 +24,28 @@ var rotation_speed : float = 1
 var moveInput : Vector2
 
 
-func _enter_tree() -> void:
-	set_multiplayer_authority(str(name).to_int())
+
 
 func _ready() -> void:
-	if !is_multiplayer_authority():
-		camera.queue_free()
-		return
+	if multiplayer.has_multiplayer_peer():
+		print('s')
+		if !is_multiplayer_authority():
+			camera.queue_free()
+			return
 	camera.current = true
 	DebugConsole.log(str(is_multiplayer_authority()))
 	state_machine.change_state(s_idle)
 
 func _process(delta: float) -> void:
-	if !is_multiplayer_authority():return
+	if multiplayer.has_multiplayer_peer(): if !is_multiplayer_authority():return
 	moveInput = Input.get_vector("left","right","up","down").normalized()
+	
 	
 
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if !is_multiplayer_authority():return
+	if multiplayer.has_multiplayer_peer(): if !is_multiplayer_authority():return
 	if event is InputEventMouseMotion and Global.is_captured == true :
 
 		rotate_y(.001 * - event.relative.x * rotation_speed)

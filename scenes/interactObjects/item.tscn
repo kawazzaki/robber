@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://c8g0m51w3cvvh"]
+
+[ext_resource type="Script" uid="uid://bsecywnj3rkkb" path="res://scripts/interactObjects/core/item.gd" id="1_36eph"]
+[ext_resource type="Texture2D" uid="uid://deqoq0c5clc5u" path="res://others/proto_tex.png" id="2_viohy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_viohy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2085r"]
+shading_mode = 0
+albedo_texture = ExtResource("2_viohy")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_36eph"]
+
+[node name="Item" type="StaticBody3D" unique_id=781413138]
+script = ExtResource("1_36eph")
+metadata/_custom_type_script = "uid://bsecywnj3rkkb"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1703920459]
+shape = SubResource("BoxShape3D_viohy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1860280186]
+material_override = SubResource("StandardMaterial3D_2085r")
+mesh = SubResource("BoxMesh_36eph")

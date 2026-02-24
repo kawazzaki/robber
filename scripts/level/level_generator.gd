@@ -40,8 +40,8 @@ func build(seed : int):
 	clear()
 	add_start_room()
 	await generate_rooms()
-	pathFinding.build_finished(rooms)
-	addDoors.build_finished(connections,rng)
+	await pathFinding.build_finished(rooms)
+	await addDoors.build_finished(connections,rng)
 
 
 func add_start_room():

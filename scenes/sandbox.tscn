@@ -3,6 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://d6yj8m5rfg0u" path="res://scenes/player/player.tscn" id="2_a8pr3"]
 [ext_resource type="PackedScene" uid="uid://ghaal2y00mcf" path="res://scenes/level/level.tscn" id="2_rgld7"]
 [ext_resource type="Script" uid="uid://c2fntkw60oicx" path="res://scripts/multiplayer/multiplayer.gd" id="3_j6lu3"]
+[ext_resource type="Script" uid="uid://netbg28s68mg" path="res://scripts/debug.gd" id="4_j6lu3"]
+[ext_resource type="PackedScene" uid="uid://c8g0m51w3cvvh" path="res://scenes/interactObjects/item.tscn" id="5_tpt06"]
+[ext_resource type="PackedScene" uid="uid://c3age8nnvcka1" path="res://scenes/interactObjects/door.tscn" id="6_16ffl"]
 
 [node name="sandbox" type="Node3D" unique_id=1549288505]
 
@@ -15,8 +18,28 @@ player_scene = ExtResource("2_a8pr3")
 player_spawner = NodePath("../spawner")
 multiplayer_spawner = NodePath("../MultiplayerSpawner")
 level = NodePath("../level")
+generating_level = true
 
 [node name="spawner" type="Node3D" parent="." unique_id=974140260]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=679334961]
 _spawnable_scenes = PackedStringArray("uid://d6yj8m5rfg0u")
+
+[node name="Debug" type="Node" parent="." unique_id=1771389347]
+script = ExtResource("4_j6lu3")
+player_scene = ExtResource("2_a8pr3")
+
+[node name="Item" parent="." unique_id=781413138 instance=ExtResource("5_tpt06")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.407052)
+isCondition = true
+condition_name = "key"
+
+[node name="door2" parent="." unique_id=970612141 instance=ExtResource("6_16ffl")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8, 0, -3)
+isLocked = true
+condtion_name = "key"
+
+[node name="door" parent="." unique_id=1563796403 instance=ExtResource("6_16ffl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 1)
+isLocked = true
+condtion_name = "key"

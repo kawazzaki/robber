@@ -9,6 +9,8 @@ var port = 6002
 @export var player_spawner : Node3D
 @export var multiplayer_spawner : MultiplayerSpawner
 @export var level : Level
+
+@export var generating_level : bool
 var seed : int
 
 
@@ -33,7 +35,7 @@ func host_server():
 	multiplayer.peer_connected.connect(_peer_connected)
 	seed = randi()
 	multiplayer_spawner.spawn(multiplayer.get_unique_id())
-	generate_level()
+	if generating_level:generate_level()
 
 
 func join_server():
@@ -43,12 +45,12 @@ func join_server():
 
 func _peer_connected(id: int):
 	DebugConsole.log("player " + str(id) + " joined the party")
+	if generating_level:generate_level.rpc_id(id, seed)
 	multiplayer_spawner.spawn(id)
-	generate_level.rpc_id(id, seed)
 
 
 @rpc("authority", "reliable")
 func generate_level(s: int = 0):
 	if s != 0:
 		seed = s
-	level.build(seed)
+	await level.build(seed)
