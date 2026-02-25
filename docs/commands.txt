@@ -1,0 +1,3 @@
+sp -> spwan local player
+host -> host game 
+join -> join game 
