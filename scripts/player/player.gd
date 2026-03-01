@@ -10,6 +10,8 @@ class_name Player
 @export var aim_raycast : RayCast3D
 @export var interact_system : Node
 @export var camera : Camera3D
+@export var animator : AnimationPlayer
+@export var player_mesh : Node3D
 @export_category("States")
 @export var s_idle : State
 @export var s_run : State
@@ -23,15 +25,15 @@ var move_speed : float = 10
 var rotation_speed : float = 1
 var moveInput : Vector2
 
-
+var rotating_camera : bool = false
 
 
 func _ready() -> void:
 	if multiplayer.has_multiplayer_peer():
-		print('s')
 		if !is_multiplayer_authority():
 			camera.queue_free()
 			return
+	player_mesh.visible = false
 	camera.current = true
 	DebugConsole.log(str(is_multiplayer_authority()))
 	state_machine.change_state(s_idle)
@@ -47,10 +49,12 @@ func _process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if multiplayer.has_multiplayer_peer(): if !is_multiplayer_authority():return
 	if event is InputEventMouseMotion and Global.is_captured == true :
-
+		rotating_camera = true
 		rotate_y(.001 * - event.relative.x * rotation_speed)
 		head.rotate_x(.001 *-event.relative.y * rotation_speed)
 		head.rotation_degrees.x = clamp(head.rotation_degrees.x,-90 ,90)
+	else:
+		rotating_camera = false
 
 
 

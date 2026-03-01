@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cgmpxe85cewme" path="res://scripts/player/idle.gd" id="4_p47bc"]
 [ext_resource type="Script" uid="uid://yp2ci6otu0e2" path="res://scripts/player/run.gd" id="5_75vfm"]
 [ext_resource type="Script" uid="uid://d26awwq7ffym6" path="res://scripts/player/interact_system.gd" id="6_75vfm"]
+[ext_resource type="PackedScene" uid="uid://dfo085iggmg3g" path="res://scenes/player/robber.tscn" id="7_0owmy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7p2l"]
 
@@ -16,14 +17,11 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+properties/2/path = NodePath("robber/AnimationPlayer:current_animation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_75vfm"]
-shading_mode = 0
-albedo_color = Color(1, 0.5921569, 1, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_75vfm"]
-
-[node name="player" type="CharacterBody3D" unique_id=1959322312 node_paths=PackedStringArray("state_machine", "head", "aim_raycast", "interact_system", "camera", "s_idle", "s_run")]
+[node name="player" type="CharacterBody3D" unique_id=1959322312 node_paths=PackedStringArray("state_machine", "head", "aim_raycast", "interact_system", "camera", "animator", "player_mesh", "s_idle", "s_run")]
 collision_layer = 2
 script = ExtResource("1_dovo2")
 state_machine = NodePath("stateMachine")
@@ -31,6 +29,8 @@ head = NodePath("head")
 aim_raycast = NodePath("head/camera/aim")
 interact_system = NodePath("interact_system")
 camera = NodePath("head/camera")
+animator = NodePath("robber/AnimationPlayer")
+player_mesh = NodePath("robber")
 s_idle = NodePath("stateMachine/idle")
 s_run = NodePath("stateMachine/run")
 
@@ -52,20 +52,54 @@ script = ExtResource("3_lvxji")
 
 [node name="idle" type="Node" parent="stateMachine" unique_id=166136278]
 script = ExtResource("4_p47bc")
+anim_name = "Idle"
 metadata/_custom_type_script = "uid://2t3v02t13brm"
 
 [node name="run" type="Node" parent="stateMachine" unique_id=1529686886]
 script = ExtResource("5_75vfm")
+anim_name = "Run Anime"
 metadata/_custom_type_script = "uid://2t3v02t13brm"
 
 [node name="interact_system" type="Node" parent="." unique_id=137866573]
 script = ExtResource("6_75vfm")
-requirement = "nail_puller"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1952337538]
 replication_config = SubResource("SceneReplicationConfig_75vfm")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=280719720]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-material_override = SubResource("StandardMaterial3D_75vfm")
-mesh = SubResource("CapsuleMesh_75vfm")
+[node name="robber" parent="." unique_id=40739951 instance=ExtResource("7_0owmy")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Skeleton3D" parent="robber/Skinned Mesh 0" parent_id_path=PackedInt32Array(40739951, 83247490) index="0" unique_id=2710847]
+bones/1/position = Vector3(0.007975414, 0.12974165, 1.3157585)
+bones/1/rotation = Quaternion(0.75593114, -0.088295184, -0.07525503, 0.6442894)
+bones/2/rotation = Quaternion(-0.06470268, 1.1509992e-07, -7.932635e-09, 0.9979046)
+bones/3/rotation = Quaternion(0.015377849, 0.00012403762, 0.00024848487, 0.9998818)
+bones/4/rotation = Quaternion(0.09233497, 0.00031253847, 0.00025737841, 0.99572796)
+bones/5/rotation = Quaternion(0.018478645, -0.00023680099, -0.00024234732, 0.99982923)
+bones/6/rotation = Quaternion(-0.0786743, 1.108856e-08, -1.2267266e-08, 0.99690044)
+bones/7/rotation = Quaternion(-0.016260521, 4.4260226e-08, -3.074327e-09, 0.9998678)
+bones/8/rotation = Quaternion(-0.64794374, -0.320759, -0.36242893, 0.58815646)
+bones/9/rotation = Quaternion(0.035182323, 0.74303794, -0.31796676, 0.58783835)
+bones/10/rotation = Quaternion(0.28030446, 0.042883486, -0.0048901867, 0.95894027)
+bones/11/rotation = Quaternion(0.106008805, 0.0063757803, -0.025674568, 0.99401325)
+bones/12/rotation = Quaternion(0.43209004, 0.5386996, -0.4580465, 0.5597271)
+bones/13/rotation = Quaternion(-0.67825186, 0.25302756, 0.29789466, 0.6222622)
+bones/14/rotation = Quaternion(0.031117087, -0.7515621, 0.28881598, 0.5922596)
+bones/15/rotation = Quaternion(0.36726224, -0.15368928, 0.061670393, 0.9152567)
+bones/16/rotation = Quaternion(0.11670907, 0.002916631, 0.04477865, 0.9921519)
+bones/17/rotation = Quaternion(0.43209, -0.53869975, 0.4580466, 0.5597269)
+bones/18/rotation = Quaternion(0.96390235, 0.11038858, -0.013610566, 0.24191196)
+bones/19/rotation = Quaternion(0.18485375, -0.11210096, 0.021219434, 0.97612107)
+bones/20/rotation = Quaternion(-0.49533656, 0.022376513, 0.09231862, 0.8634919)
+bones/21/rotation = Quaternion(-0.00013714569, 0.9643068, -0.26478747, -0.0004995333)
+bones/22/rotation = Quaternion(-4.6629935e-08, -3.2590798e-08, -1.1643363e-10, 1)
+bones/23/rotation = Quaternion(0.9932611, -0.11445438, 0.014111928, 0.011556302)
+bones/24/rotation = Quaternion(0.114642106, 0.3584104, -0.044409998, 0.9254334)
+bones/25/rotation = Quaternion(-0.5777091, -0.049669117, -0.16396318, 0.7980609)
+bones/26/rotation = Quaternion(-0.00013701837, 0.9643068, -0.26478747, -0.000499527)
+bones/27/rotation = Quaternion(-3.1728796e-08, -3.261994e-08, -4.985543e-15, 1)
+
+[node name="AnimationPlayer" parent="robber" index="1" unique_id=431257851]
+autoplay = &"Idle"
+
+[editable path="robber"]
