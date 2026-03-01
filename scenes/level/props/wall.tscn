@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bbwijnb0172gb"]
+
+[ext_resource type="Texture2D" uid="uid://deqoq0c5clc5u" path="res://others/proto_tex.png" id="1_bkbmq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_42blk"]
+shading_mode = 0
+albedo_texture = ExtResource("1_bkbmq")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_dphgg"]
+size = Vector3(2, 3, 0.1)
+
+[node name="wall" type="StaticBody3D" unique_id=667737914]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=937318568]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+material_override = SubResource("StandardMaterial3D_42blk")
+mesh = SubResource("BoxMesh_dphgg")

@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cb831pr2p7cmx" path="res://scenes/level/rooms/room_4.tscn" id="6_tf2q7"]
 [ext_resource type="Script" uid="uid://dakpf0gjhfn7h" path="res://scripts/level/add_doors.gd" id="8_xv074"]
 [ext_resource type="PackedScene" uid="uid://c3age8nnvcka1" path="res://scenes/interactObjects/door.tscn" id="9_sytrn"]
+[ext_resource type="PackedScene" uid="uid://bbwijnb0172gb" path="res://scenes/level/props/wall.tscn" id="10_tf2q7"]
 
 [node name="level" type="Node3D" unique_id=1739120869 node_paths=PackedStringArray("parent", "pathFinding", "addDoors")]
 script = ExtResource("1_h3e3j")
@@ -28,3 +29,4 @@ script = ExtResource("4_qkmgm")
 [node name="add_doors" type="Node" parent="." unique_id=1481863015]
 script = ExtResource("8_xv074")
 door_scene = ExtResource("9_sytrn")
+wall_scene = ExtResource("10_tf2q7")

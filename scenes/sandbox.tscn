@@ -4,13 +4,18 @@
 [ext_resource type="PackedScene" uid="uid://ghaal2y00mcf" path="res://scenes/level/level.tscn" id="2_rgld7"]
 [ext_resource type="Script" uid="uid://c2fntkw60oicx" path="res://scripts/multiplayer/multiplayer.gd" id="3_j6lu3"]
 [ext_resource type="Script" uid="uid://netbg28s68mg" path="res://scripts/debug.gd" id="4_j6lu3"]
-[ext_resource type="PackedScene" uid="uid://c8g0m51w3cvvh" path="res://scenes/interactObjects/item.tscn" id="5_tpt06"]
-[ext_resource type="PackedScene" uid="uid://c3age8nnvcka1" path="res://scenes/interactObjects/door.tscn" id="6_16ffl"]
+[ext_resource type="Shader" uid="uid://c23wx8f0mnpkq" path="res://shaders/psx_crt.gdshader" id="7_17a3a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_17a3a"]
+shader = ExtResource("7_17a3a")
+shader_parameter/brightnessMult = 4.0
+shader_parameter/wiggleMult = 0.005
+shader_parameter/chromaticAberrationOffset = 0.001
 
 [node name="sandbox" type="Node3D" unique_id=1549288505]
 
 [node name="level" parent="." unique_id=1739120869 instance=ExtResource("2_rgld7")]
-max_rooms = 5
+max_rooms = 10
 
 [node name="multiplayer" type="Node" parent="." unique_id=179240804 node_paths=PackedStringArray("player_spawner", "multiplayer_spawner", "level")]
 script = ExtResource("3_j6lu3")
@@ -29,17 +34,11 @@ _spawnable_scenes = PackedStringArray("uid://d6yj8m5rfg0u")
 script = ExtResource("4_j6lu3")
 player_scene = ExtResource("2_a8pr3")
 
-[node name="Item" parent="." unique_id=781413138 instance=ExtResource("5_tpt06")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.407052)
-isCondition = true
-condition_name = "key"
-
-[node name="door2" parent="." unique_id=970612141 instance=ExtResource("6_16ffl")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8, 0, -3)
-isLocked = true
-condtion_name = "key"
-
-[node name="door" parent="." unique_id=1563796403 instance=ExtResource("6_16ffl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 1)
-isLocked = true
-condtion_name = "key"
+[node name="ColorRect" type="ColorRect" parent="." unique_id=583668148]
+material = SubResource("ShaderMaterial_17a3a")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
