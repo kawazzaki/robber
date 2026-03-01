@@ -12,7 +12,7 @@ func spawn_door(info : Array,index : int , rng : RandomNumberGenerator):
     var angle = atan2(dir.x, dir.z)
 
     # Add door to the scene root (not the room) so it's not affected by room scale
-    room.get_node("links").add_child(door)
+    room.get_node("doors").add_child(door)
     door.global_rotation.y = angle
     door.open_side = 1 if dir.x > 0 else -1 
     door.global_position = room.global_position - door_info["to_center"] + door_info["dir"] * 0.3 - door.transform.basis.x

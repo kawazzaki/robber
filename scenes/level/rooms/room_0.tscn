@@ -90,3 +90,5 @@ mesh = SubResource("ArrayMesh_n0bio")
 [node name="coll" type="CollisionShape3D" parent="." unique_id=1679075686]
 transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 10, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_g6nke")
+
+[node name="doors" type="Node3D" parent="." unique_id=2136379874]

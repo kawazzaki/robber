@@ -124,3 +124,5 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.050626755, 2, -0.029435158)
 shape = SubResource("BoxShape3D_3nxsq")
 debug_color = Color(0, 0.6, 0.69803923, 1)
+
+[node name="doors" type="Node3D" parent="." unique_id=2136947025]
