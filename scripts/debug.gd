@@ -9,6 +9,7 @@ func _ready():
 
 
 
+
 func spawn_player() -> Node:
 	var player = player_scene.instantiate()
 	get_parent().add_child(player)

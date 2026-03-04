@@ -4,18 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://ghaal2y00mcf" path="res://scenes/level/level.tscn" id="2_rgld7"]
 [ext_resource type="Script" uid="uid://c2fntkw60oicx" path="res://scripts/multiplayer/multiplayer.gd" id="3_j6lu3"]
 [ext_resource type="Script" uid="uid://netbg28s68mg" path="res://scripts/debug.gd" id="4_j6lu3"]
-[ext_resource type="Shader" uid="uid://c23wx8f0mnpkq" path="res://shaders/psx_crt.gdshader" id="7_17a3a"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_17a3a"]
-shader = ExtResource("7_17a3a")
-shader_parameter/brightnessMult = 4.0
-shader_parameter/wiggleMult = 0.005
-shader_parameter/chromaticAberrationOffset = 0.001
 
 [node name="sandbox" type="Node3D" unique_id=1549288505]
+script = ExtResource("4_j6lu3")
 
 [node name="level" parent="." unique_id=1739120869 instance=ExtResource("2_rgld7")]
-max_rooms = 10
+max_rooms = 30
 
 [node name="multiplayer" type="Node" parent="." unique_id=179240804 node_paths=PackedStringArray("player_spawner", "multiplayer_spawner", "level")]
 script = ExtResource("3_j6lu3")
@@ -28,17 +22,5 @@ generating_level = true
 [node name="spawner" type="Node3D" parent="." unique_id=974140260]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=679334961]
-_spawnable_scenes = PackedStringArray("uid://d6yj8m5rfg0u")
-
-[node name="Debug" type="Node" parent="." unique_id=1771389347]
-script = ExtResource("4_j6lu3")
-player_scene = ExtResource("2_a8pr3")
-
-[node name="ColorRect" type="ColorRect" parent="." unique_id=583668148]
-material = SubResource("ShaderMaterial_17a3a")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+_spawnable_scenes = PackedStringArray("uid://d6yj8m5rfg0u", "uid://c3age8nnvcka1")
+spawn_path = NodePath("../spawner")

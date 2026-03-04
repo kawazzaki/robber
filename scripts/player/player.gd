@@ -42,7 +42,7 @@ func _process(delta: float) -> void:
 	if multiplayer.has_multiplayer_peer(): if !is_multiplayer_authority():return
 	moveInput = Input.get_vector("left","right","up","down").normalized()
 	
-	
+	DebugDraw3D.draw_line(global_position,global_position + transform.basis.z * 3)
 
 
 

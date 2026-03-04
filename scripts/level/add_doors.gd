@@ -58,7 +58,9 @@ func spawn_door(info: Array, index: int, rng: RandomNumberGenerator) -> void:
 
 	room.get_node("doors").add_child(door)
 	door.global_rotation.y = angle
-	door.open_side = 1 if dir.x > 0 else -1
+	# open_side is no longer preset here — door.gd determines it dynamically
+	# from the interacting player's position at runtime, which is more accurate
+	# and works correctly for all door orientations (not just X-axis facing doors)
 	door.global_position = room.global_position - door_info["to_center"] + door_info["dir"] * 0.3 - door.transform.basis.x
 	door.name = "door" + str(index)
 
@@ -74,6 +76,7 @@ func spawn_walls(room: Room) -> void:
 		# Orient wall to face outward, same logic as door angle calculation
 		var dir: Vector3 = -link_point.global_transform.basis.z  # link point's forward
 		wall.global_rotation.y = atan2(dir.x, dir.z)
+
 
 func _is_occupied(pos: Vector3) -> bool:
 	for occupied_pos in _occupied_positions:

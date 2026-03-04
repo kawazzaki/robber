@@ -14,4 +14,7 @@ func update(delta :float):
 
 func pyhsics_update(delta:float):
 	player.animator.play(anim_name)
+	
+	player.player_mesh.rotation.y = atan2(player.moveInput.x, player.moveInput.y)
+
 	player.player_move()

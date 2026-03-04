@@ -17,7 +17,7 @@ nodes/root_type=""
 nodes/root_name=""
 nodes/root_script=null
 nodes/apply_root_scale=true
-nodes/root_scale=1.5
+nodes/root_scale=0.25
 nodes/import_as_skeleton_bones=false
 nodes/use_name_suffixes=true
 nodes/use_node_type_suffixes=true
@@ -39,8 +39,8 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "animations": {
-"Idle": {
-"save_to_file/enabled": true,
+"idle": {
+"save_to_file/enabled": false,
 "save_to_file/fallback_path": "",
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "",
@@ -2095,11 +2095,11 @@ _subresources={
 "slice_99/start_frame": 0,
 "slices/amount": 0
 },
-"Run Anime": {
-"save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://models/character/animations/run.anim",
-"save_to_file/keep_custom_tracks": true,
-"save_to_file/path": "uid://coo4qcgeyhq88",
+"run": {
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/keep_custom_tracks": "",
+"save_to_file/path": "",
 "settings/loop_mode": 1,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -4150,6 +4150,11 @@ _subresources={
 "slice_99/save_to_file/path": "",
 "slice_99/start_frame": 0,
 "slices/amount": 0
+}
+},
+"nodes": {
+"PATH:Cube": {
+"import/skip_import": true
 }
 }
 }
